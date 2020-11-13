@@ -56,6 +56,16 @@ class BiDAF:
         self.num_decoders = num_decoders
         self.decoder_dropout = decoder_dropout
 
+    """"homework: add by Sally"""
+    def cnn_embedding(self):
+
+        model = tf.keras.Sequential()
+        model.add(Embedding(word_num, embedding_dim))
+        model.add(GlobalAveragePooling1D())
+        model.add(Dense(128, activation=tf.nn.relu))
+        model.add(Dense(2, activation='softmax'))
+        return model
+
     def build_model(self):
         """
         构建模型
@@ -77,8 +87,9 @@ class BiDAF:
         # Sally: glove word embedding
 
 
-
         # Sally: CNN char embedding
+        g_cemb = cnn_embedding(cinn)
+        q_cemb = cnn_embedding(qinn)
 
         for i in range(self.num_highway_layers):
             """
